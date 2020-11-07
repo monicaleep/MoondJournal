@@ -56,14 +56,19 @@ module.exports = (sequelize, DataTypes) => {
   user.addHook('beforeCreate',async (pendingUser,options)=>{
     await bcrypt.hash(pendingUser.password,10)
     .then(hashedPassword=>{
-      console.log(hashedPassword);
+      //console.log(hashedPassword);
       pendingUser.password = hashedPassword;
     })
   })
 
-  user.prototype.validPassword = async (passwordInput) =>{
-    let match = await bcrypt.compare(passwordInput, this.password)
-    return match;
+  user.prototype.validPassword = async function(passwordInput){
+    try{
+      let match = await bcrypt.compare(passwordInput, this.password);
+      //console.log("?????????????????match: ",match)
+      return match;
+    }  catch(error){
+      console.log(error)
+    }
   }
 
   return user;

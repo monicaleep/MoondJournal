@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Express Auth Boilerplate</title>
-  </head>
-  <body>
-    <header>
-      <h1>My Auth App</h1>
-    </header>
-    <%- body %>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Express Auth Boilerplate</title>
+</head>
+
+<body>
+  <header>
+    <h1>My Auth App</h1>
+    <nav>
+      <ul>
+        <% if (!currentUser) { %>
+        <li><a href="/auth/signup">Signup</a></li>
+        <li><a href="/auth/login">Login</a></li>
+        <% } else { %>
+        <li><a href="/auth/logout">Logout</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <% } %>
+      </ul>
+    </nav>
+  </header>
+  <%- include('partials/alerts') %>
+  <%- body %>
+</body>
+
 </html>

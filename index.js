@@ -1,10 +1,11 @@
+require('dotenv').config()
 const express = require('express');
 const app = express();
 const ejsLayouts = require('express-ejs-layouts')
 const session = require('express-session')
 const passport = require('./config/ppConfig.js')
 const flash = require('connect-flash')
-
+const isLoggedIn = require('./middleware/isLoggedIn')
 
 //setup ejs and ejs layouts
 app.set('view engine','ejs')
@@ -15,7 +16,7 @@ app.use(express.urlencoded({ extended: false }))
 
 // session configuration
 app.use(session({
-  secret: 'keyboard cat',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }));
@@ -39,7 +40,7 @@ app.use((req,res,next)=>{
 //controllers middleware
 app.use('/auth',require('./controllers/auth'))
 
-app.get('/profile',(req,res)=>{
+app.get('/profile',isLoggedIn,(req,res)=>{
   res.render('profile')
 })
 

@@ -15,9 +15,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   entry.init({
-    text: DataTypes.STRING,
+    text: DataTypes.TEXT,
     phase: DataTypes.STRING,
-    phaseimg: DataTypes.STRING,
+    phaseimg: DataTypes.TEXT,
     userId: DataTypes.INTEGER,
     score: DataTypes.INTEGER,
     retrograde: DataTypes.BOOLEAN,

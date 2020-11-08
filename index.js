@@ -31,7 +31,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-//flash middleware after session middleware!!!
+//flash middleware goes after session middleware!!!
 app.use(flash());
 
 //CUSTOM MIDDLEWARE

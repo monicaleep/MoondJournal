@@ -19,6 +19,13 @@ router.get('/new',isLoggedIn,(req,res)=>{
   res.render('journal/new',{today: new Date().toLocaleDateString('en-CA')})
 })
 
+router.delete('/:id',isLoggedIn,async (req,res)=>{
+  const deleted = await db.entry.destroy({
+    where: {id:req.params.id}
+  });
+  req.flash('success','Deleted entry')
+  res.redirect('/journal')
+})
 
 // create route
 router.post('/',isLoggedIn, async (req,res)=>{

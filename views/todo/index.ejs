@@ -3,15 +3,19 @@
 <ul>
   <% foundTodos.forEach(todo=>{ %>
     <li>
-      <%= todo.task%> <form method="post" action="/todo/<%=todo.id%>?_method=PUT">
+      <%= todo.task%>
+      <form method="post" action="/todo/<%=todo.id%>?_method=PUT">
         <input type="submit" name="" value="Done today">
+      </form>
+      <form method="post" action="/todo/<%=todo.id%>?_method=DELETE">
+        <input type="submit" name="" value="Delete Task">
       </form>
       Last Done:
       <% if(todo.lastdone){ %>
         <%= todo.lastdone%>
 
       <%} else { %>
-        never done
+        Not Done Yet
       <%}%>
 
     </li>

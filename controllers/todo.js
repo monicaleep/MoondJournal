@@ -11,6 +11,7 @@ router.get('/',isLoggedIn,(req,res)=>{
     }
   })
   .then(foundTodos=>{
+    //console.log(foundTodos)
     res.render('todo/index',{foundTodos})
   })
 })
@@ -18,6 +19,22 @@ router.get('/',isLoggedIn,(req,res)=>{
 
 router.get('/new',isLoggedIn,(req,res)=>{
   res.render('todo/new')
+})
+
+router.put('/:id',isLoggedIn,(req,res)=>{
+  const today = new Date();
+  db.todo.update({
+    lastdone: today,
+  },{
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(numRowsUpdated=>{
+
+    res.redirect('/todo')
+  })
+
 })
 
 

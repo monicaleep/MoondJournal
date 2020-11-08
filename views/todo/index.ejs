@@ -3,8 +3,10 @@
 <ul>
   <% foundTodos.forEach(todo=>{ %>
     <li>
-      <%= todo.task%> <a href="/todo/<%=todo.id%>/edit">edit</a>
-
+      <%= todo.task%> <form method="post" action="/todo/<%=todo.id%>?_method=PUT">
+        <input type="submit" name="" value="Done today">
+      </form>
+      Last Done: <%= todo.lastdone%>
     </li>
   <%})%>
 </ul>

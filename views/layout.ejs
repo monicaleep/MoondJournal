@@ -4,6 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.css">
+  <link rel="stylesheet" href="/css/styles.css">
   <title>MooN/D Journal</title>
 </head>
 
@@ -13,7 +15,7 @@
     <nav>
       <ul>
         <% if (!currentUser) { %>
-        <li><a href="/auth/signup">Signup</a></li>
+        <li><a class='button' href="/auth/signup">Signup</a></li>
         <li><a href="/auth/login">Login</a></li>
         <% } else { %>
         <li><a href="/auth/logout">Logout</a></li>

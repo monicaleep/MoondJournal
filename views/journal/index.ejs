@@ -5,6 +5,8 @@
     <%= entry.date %>
     <%= entry.text %>
     <%- entry.phaseimg %>
+    <%= entry.retrograde %>
+    <%= entry.score < 0 ? ':(' : ':)' %>
     <a href="/journal/<%=entry.id%>/edit">Edit</a>
     <form class="" action="journal/<%=entry.id%>?_method=DELETE" method="post">
       <input type="submit" name="" value="Delete Entry">

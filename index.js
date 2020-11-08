@@ -6,10 +6,16 @@ const session = require('express-session')
 const passport = require('./config/ppConfig.js')
 const flash = require('connect-flash')
 const isLoggedIn = require('./middleware/isLoggedIn')
-
+const methodOverride = require('method-override');
 //setup ejs and ejs layouts
 app.set('view engine','ejs')
 app.use(ejsLayouts)
+
+app.use(express.urlencoded({ extended: false })) // to use the body parser
+app.use(express.static(__dirname + '/public/')) //to use the css files
+app.use(methodOverride('_method')); // for put and delete
+
+
 
 // body parser middleware - above controller middleware
 app.use(express.urlencoded({ extended: false }))
@@ -38,14 +44,19 @@ app.use((req,res,next)=>{
 
 
 //controllers middleware
-app.use('/auth',require('./controllers/auth'))
+app.use('/auth',require('./controllers/auth'));
+app.use('/journal',require('./controllers/journal'))
+app.use('/todo',require('./controllers/todo'))
+
 
 app.get('/profile',isLoggedIn,(req,res)=>{
   res.render('profile')
 })
 
 app.get('/',(req,res)=>{
+    console.log(req.session)
     res.render(`home`)
+
 })
 
 

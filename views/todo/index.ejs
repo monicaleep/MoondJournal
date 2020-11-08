@@ -1,0 +1,10 @@
+<h1> All your self care tasks</h1>
+<a href="/todo/new">New</a>
+<ul>
+  <% foundTodos.forEach(todo=>{ %>
+    <li>
+      <%= todo.task%> <a href="/todo/<%=todo.id%>/edit">edit</a>
+
+    </li>
+  <%})%>
+</ul>

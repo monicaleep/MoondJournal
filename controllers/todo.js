@@ -30,7 +30,6 @@ router.put('/:id',isLoggedIn,(req,res)=>{
     }
   })
   .then(numRowsUpdated=>{
-
     res.redirect('/todo')
   })
 
@@ -44,7 +43,7 @@ router.post('/',isLoggedIn,(req,res)=>{
     lastdone: null,
   })
   .then((createdTask)=>{
-    console.log(createdTask)
+    req.flash(`Added ${req.body.task} to your ideas list!`)
     res.redirect('/todo')
   })
 })

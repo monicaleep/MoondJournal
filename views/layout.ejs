@@ -9,25 +9,49 @@
   <title>MooN/D Journal</title>
 </head>
 
-<body>
+<body class='container'>
   <header>
-    <h1>MOO<span>N</span><span>D</span> Journal</h1>
-    <nav>
-      <ul>
+    <h1 class=' is-flex title is-align-items-center'>MOO
+      <div class="is-flex is-flex-direction-column ">
+        <div class="subtitle m-0">N</div>
+        <div class="m-0 subtitle">D</div>
+      </div>
+      Journal
+    </h1>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+
+      <div class="navbar-menu is-active" id="navbarBasicExample">
         <% if (!currentUser) { %>
-        <li><a class='button' href="/auth/signup">Signup</a></li>
-        <li><a href="/auth/login">Login</a></li>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-primary" href="/auth/signup">Signup</a>
+              <a class="button" href="/auth/login">Log in</a>
+            </div>
+          </div>
+        </div>
         <% } else { %>
-        <li><a href="/auth/logout">Logout</a></li>
-        <li><a href="/profile">Profile</a></li>
-        <li><a href="/todo">Self-Care Tasks</a></li>
-        <li><a href="/journal">Journal</a></li>
+        <div class="navbar-start">
+          <a class="navbar-item" href="/profile">Profile</a>
+          <a class="navbar-item" href="/todo">Self-Care Tasks</a>
+          <a class="navbar-item" href="/journal">Journal</a>
+          <a class="navbar-item" href="/auth/logout">Logout</a>
+        </div>
         <% } %>
-      </ul>
+      </div>
     </nav>
   </header>
-  <%- include('partials/alerts') %>
-  <%- body %>
+  <div class="container">
+    <%- include('partials/alerts') %>
+    <%- body %>
+  </div>
+  <footer class="footer">
+    <div class=" content has-text-centered">
+      <p>
+        MOO+(N||D) Journal
+      </p>
+    </div>
+  </footer>
 </body>
 
 </html>

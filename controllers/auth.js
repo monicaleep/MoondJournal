@@ -9,28 +9,22 @@ router.get('/signup',(req,res)=>{
 })
 
 router.post('/signup',(req,res)=>{
-  //console.log('sign up form user input:',req.body)
   db.user.findOrCreate({
     where : {email: req.body.email},
     defaults: {name: req.body.name, password: req.body.password}
   })
   .then(([createdUser,created])=>{
     if(!created){  //if the user was not created cos email already exists
-      req.flash('error','email already exists, try logging in')
-      res.redirect('/auth/login')
-      //console.log('An account associated with that email already exists. Try logging in.')
+      req.flash('error','A user associated with that email already exists, try logging in')
+      res.redirect('/auth/login') // redirect to login page
     } else{
-      //console.log('just created the user',createdUser)
       passport.authenticate('local',{
         successRedirect: '/',
         successFlash: 'Account created and logged in!'
       })(req,res) //IIFE
     }
-    // redirect to login page
-
   })
   .catch(err=>{
-    //console.log(err);
     req.flash('error',err.message)
     res.redirect('/auth/signup')
   })
@@ -43,8 +37,8 @@ router.get('/login',(req,res)=>{
 router.post('/login', passport.authenticate('local',{
   failureRedirect: '/auth/login',
   successRedirect: '/',
-  failureFlash: 'Invalid email or password',
-  successFlash: 'You are now logged in'
+  failureFlash: 'Invalid email or password, try again',
+  successFlash: 'You have successfully logged in'
 }))
 
 router.get('/logout',(req,res)=>{

@@ -1,4 +1,9 @@
 <h1>Write a new Journal Entry</h1>
 <form class="" action="/journal" method="post">
-  <input type="date" name="" value="">
+  <label for="date">Date:</label>
+  <input type="date" id="date" name="date" value="<%=today%>">
+  <label for="text">Entry Text:</label>
+  <textarea name="text" rows="8" cols="80"></textarea>
+  
+  <input type="submit" name="" value="Save Entry">
 </form>

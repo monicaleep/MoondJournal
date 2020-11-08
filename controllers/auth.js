@@ -23,7 +23,7 @@ router.post('/signup',(req,res)=>{
       //console.log('just created the user',createdUser)
       passport.authenticate('local',{
         successRedirect: '/',
-        successFlash: 'Account created and loggied in!'
+        successFlash: 'Account created and logged in!'
       })(req,res) //IIFE
     }
     // redirect to login page

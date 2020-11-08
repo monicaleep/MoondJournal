@@ -51,7 +51,6 @@ router.post('/',isLoggedIn,(req,res)=>{
 
 
 // delete route - delete a task from DB
-// TODO
 router.delete('/:id',isLoggedIn,(req,res)=>{
   db.todo.destroy({
     where: {id: req.params.id}

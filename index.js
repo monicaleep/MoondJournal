@@ -54,7 +54,6 @@ app.get('/profile',isLoggedIn,(req,res)=>{
 })
 
 app.get('/',(req,res)=>{
-    console.log(req.session)
     res.render(`home`)
 
 })

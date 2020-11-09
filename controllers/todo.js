@@ -5,12 +5,14 @@ const isLoggedIn = require('../middleware/isLoggedIn');
 
 // index route, show all tasks for the logged in user
 router.get('/',isLoggedIn,(req,res)=>{
-  //console.log(req.session.passport.user)
-  db.user.findByPk(req.session.passport.user)
+  db.user.findByPk(req.user.id)
   .then(user=>{
     user.getTodos().then(todos=>{
       res.render('todo/index',{foundTodos:todos})
     })
+  })
+  .catch(err=>{
+    console.log(err)
   })
 })
 
@@ -21,7 +23,7 @@ router.get('/new',isLoggedIn,(req,res)=>{
 
 // update route - change date of last done task to today's date
 router.put('/:id',isLoggedIn,(req,res)=>{
-  const today = new Date();
+  const today = new Date(); // TODO check if user is owner
   db.todo.update({
     lastdone: today,
   },{
@@ -39,17 +41,17 @@ router.put('/:id',isLoggedIn,(req,res)=>{
 router.post('/',isLoggedIn,(req,res)=>{
   db.todo.create({
     task: req.body.task,
-    userId: req.session.passport.user,
+    userId: req.user.id,
     lastdone: null,
   })
   .then((createdTask)=>{
-    req.flash(`Added ${req.body.task} to your ideas list!`)
+    req.flash(`success`,`Added ${req.body.task} to your ideas list!`)
     res.redirect('/todo')
   })
 })
 
 
-// delete route - delete a task from DB
+// delete route - delete a task from DB TODO check if user is owner
 router.delete('/:id',isLoggedIn,(req,res)=>{
   db.todo.destroy({
     where: {id: req.params.id}

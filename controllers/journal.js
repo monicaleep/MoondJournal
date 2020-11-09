@@ -9,8 +9,9 @@ const sentiment = new Sentiment();
 
 // Index route - show all entries for the user
 router.get('/',isLoggedIn,async (req,res)=>{
-  const user = await db.user.findByPk(req.session.passport.user)
-  const entries = await user.getEntries()
+  //console.log(req.user)
+  const user = await db.user.findByPk(req.user.id)
+  const entries = await user.getEntries({order: [['date','DESC']]})
   res.render('journal/index',{entries})
 })
 
@@ -19,6 +20,7 @@ router.get('/new',isLoggedIn,(req,res)=>{
   res.render('journal/new',{today: new Date().toLocaleDateString('en-CA')})
 })
 
+// delete route - deletes a journal entry
 router.delete('/:id',isLoggedIn,async (req,res)=>{
   const deleted = await db.entry.destroy({
     where: {id:req.params.id}
@@ -43,7 +45,7 @@ router.post('/',isLoggedIn, async (req,res)=>{
       date: req.body.date,
       text: req.body.text,
       score: score,
-      userId: req.session.passport.user,
+      userId: req.user.id,
       phase: phaseName,
       phaseimg: image,
       retrograde: retrograde
@@ -52,4 +54,38 @@ router.post('/',isLoggedIn, async (req,res)=>{
     res.redirect('/journal')
 })
 
+// update route - put the changes into the database
+router.put('/:id',isLoggedIn,(req,res)=>{
+  res.send('put route')
+})
+
+// edit route - edit an Entry
+router.get('/:id/edit',isLoggedIn,async (req,res)=>{
+  // need to check if user is the owner
+  try{
+    const entryToEdit = await db.entry.findByPk(req.params.id)
+    if(entryToEdit.userId === req.user.id){
+      res.render('journal/edit',{entry:entryToEdit})
+    } else {
+      req.flash('error',`You don't have permission to edit that entry`);
+      res.redirect('/journal')
+    }
+  } catch(err){
+    req.flash('error','Entry not found')
+    res.redirect('/journal')
+  }
+
+})
+
+// show route - show more details of an entry
+router.get('/:id',isLoggedIn,async (req,res)=>{
+  const entry = await db.entry.findByPk(req.params.id)
+  if(entry.userId === req.user.id){
+    res.render('journal/show',{entry})
+
+  } else{
+    req.flash('error','That is a private journal entry, try to view one that you wrote')
+    res.redirect('/journal')
+  }
+})
 module.exports = router;

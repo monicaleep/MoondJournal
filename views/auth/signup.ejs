@@ -1,13 +1,55 @@
-<h2>signup form</h2>
-<form class="" action="/auth/signup" method="post">
-  <label for="new-name">Name</label>
-  <input type="text" name="name" id="new-name" value="">
+<div class="hero is-medium is-dark is-bold">
+  <div class="hero-body">
+    <div class="columns">
+      <div class="column is-two-thirds">
 
-  <label for="new-email">Email</label>
-  <input type="email" name="email" id="new-email" value="">
+        <img src="/img/moon.jpg" alt="">
+      </div>
+      <div class="column is-one-third">
+        <h2 class="title">Sign up</h2>
+        <form class="" action="/auth/signup" method="post">
 
-  <label for="new-password">Password</label>
-  <input type="password" name="password" id="new-password" value="">
 
-  <input type="submit" name="" value="Sign Up">
-</form>
+          <div class="field">
+            <label class="label has-text-light">Name</label>
+            <div class="control has-icons-left">
+              <input class="input " type="name"  name="name" value="">
+              <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label has-text-light">Email</label>
+            <div class="control has-icons-left">
+              <input class="input " type="email"  name="email" value="">
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label has-text-light">Password</label>
+            <div class="control has-icons-left">
+              <input class="input" name="password" type="password"  value="">
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="field ">
+            <div class="control">
+              <button type="submit" class="button is-dark is-inverted is-outlined">Sign Up</button>
+            </div>
+          </div>
+
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

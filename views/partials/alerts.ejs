@@ -1,16 +1,18 @@
-<% if (alerts.error) { %>
-    <% alerts.error.forEach(msg => { %>
-      <div class="notification is-danger">
+<div class="container">
+  <% if (alerts.error) { %>
+      <% alerts.error.forEach(msg => { %>
+        <div class="notification is-danger">
 
-        <%= msg %>
-      </div>
-    <% }) %>
-<% } %>
-<% if (alerts.success) { %>
-    <% alerts.success.forEach(msg => { %>
-      <div class="notification is-success">
-        <%= msg %>
+          <%= msg %>
+        </div>
+      <% }) %>
+  <% } %>
+  <% if (alerts.success) { %>
+      <% alerts.success.forEach(msg => { %>
+        <div class="notification is-success">
+          <%= msg %>
 
-      </div>
-    <% }) %>
-<% } %>
+        </div>
+      <% }) %>
+  <% } %>
+</div>

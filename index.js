@@ -54,8 +54,11 @@ app.get('/profile',isLoggedIn,(req,res)=>{
 })
 
 app.get('/',(req,res)=>{
-    res.render(`home`)
+    res.render('home')
+})
 
+app.get('/*',(req,res)=>{
+  res.render('404')
 })
 
 

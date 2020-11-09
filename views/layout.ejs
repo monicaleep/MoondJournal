@@ -9,17 +9,21 @@
   <title>MooN/D Journal</title>
 </head>
 
-<body class='container'>
+<body>
   <header>
-    <h1 class=' is-flex title is-align-items-center'>MOO
-      <div class="is-flex is-flex-direction-column ">
-        <div class="subtitle m-0">N</div>
-        <div class="m-0 subtitle">D</div>
-      </div>
-      Journal
-    </h1>
     <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <div class="navbar-item">
+          <a href="/"class=' is-flex title is-align-items-center'>MOO
+            <div class="is-flex is-flex-direction-column ">
+              <div class="subtitle m-0">N</div>
+              <div class="m-0 subtitle">D</div>
+            </div>
+            Journal
+          </a>
+        </div>
 
+      </div>
       <div class="navbar-menu is-active" id="navbarBasicExample">
         <% if (!currentUser) { %>
         <div class="navbar-end">

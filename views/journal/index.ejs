@@ -2,8 +2,7 @@
 <a href="/journal/new">New Entry</a>
 <% entries.forEach(entry=>{ %>
   <div>
-    <%= entry.date %>
-    <%= entry.text %>
+    <a href="/journal/<%=entry.id%>"><%= entry.date %></a>
     <%- entry.phaseimg %>
     <%= entry.retrograde %>
     <%= entry.score < 0 ? ':(' : ':)' %>

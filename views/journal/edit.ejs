@@ -1,0 +1,12 @@
+<div class="content">
+  editing the entry <%= entry.id %>
+
+</div>
+<form class="" action="/journal/<%=entry.id%>?_method=PUT" method="post">
+  <label for="date">Date:</label>
+  <input type="date" id="date" name="date" value="<%=entry.date%>">
+  <label for="text">Entry Text:</label>
+  <textarea name="text" rows="8" cols="80"><%=entry.text%></textarea>
+
+  <input type="submit" name="" value="Save Entry">
+</form>

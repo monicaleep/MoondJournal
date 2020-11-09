@@ -1,0 +1,9 @@
+<h2 class='title'>Diary Entry from <%=entry.date%> </h2>
+<div class="content">
+  <h3 class='subtitle'>You wrote:</h3>
+  <%=entry.text%>
+</div>
+<a href="/journal/<%=entry.id%>/edit">Edit this entry</a>
+<form class="" action="journal/<%=entry.id%>?_method=DELETE" method="post">
+  <input type="submit" name="" value="Delete this entry">
+</form>

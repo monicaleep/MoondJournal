@@ -1,9 +1,31 @@
-<h1>Write a new Journal Entry</h1>
-<form class="" action="/journal" method="post">
-  <label for="date">Date:</label>
-  <input type="date" id="date" name="date" value="<%=today%>">
-  <label for="text">Entry Text:</label>
-  <textarea name="text" rows="8" cols="80"></textarea>
-  
-  <input type="submit" name="" value="Save Entry">
-</form>
+<section class="landinghero hero is-fullheight is-dark">
+  <div class="hero-body">
+    <div class="columns">
+      <div class="column">
+        <h1 class="title ">
+          Write a new journal entry.
+        </h1>
+        <h2 class="subtitle">
+          Be descriptive about how you felt that day.
+        </h2>
+      </div>
+      <div class="column">
+        <form class="" action="/journal" method="post">
+          <div class="field">
+            <label class="label has-text-light" for="date">Date:</label>
+            <div class="control">
+              <input class="text" type="date" id="date" name="date" value="<%=today%>">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label has-text-light" for="text">Entry Text:</label>
+            <div class="control">
+              <textarea class="textarea" name="text" rows="8" cols="80"></textarea>
+            </div>
+          </div>
+          <input class="button is-dark is-inverted is-outlined" type="submit" name="" value="Save Entry">
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

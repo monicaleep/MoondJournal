@@ -43,14 +43,11 @@ app.use((req,res,next)=>{
   next();
 })
 
-
 //controllers middleware
 app.use('/auth',require('./controllers/auth'));
 app.use('/journal',require('./controllers/journal'))
 app.use('/todo',require('./controllers/todo'))
 app.use('/profile',require('./controllers/profile'))
-
-
 
 
 app.get('/',(req,res)=>{

@@ -1,7 +1,16 @@
 <h2 class='title'>Diary Entry from <%=entry.date%> </h2>
+
+  <%-entry.phaseimg%>
+
+
+
 <div class="content">
   <h3 class='subtitle'>You wrote:</h3>
   <%=entry.text%>
+</div>
+
+<div class="content">
+  <p>Mercury was <%= entry.retrograde ? "" : 'not'%> in retrograde</p>
 </div>
 <a href="/journal/<%=entry.id%>/edit">Edit this entry</a>
 <form class="" action="journal/<%=entry.id%>?_method=DELETE" method="post">

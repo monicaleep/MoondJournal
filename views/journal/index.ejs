@@ -1,14 +1,54 @@
-<h1>Journal index</h1>
-<a href="/journal/new">New Entry</a>
-<% entries.forEach(entry=>{ %>
-  <div>
-    <a href="/journal/<%=entry.id%>"><%= entry.date %></a>
-    <%- entry.phaseimg %>
-    <%= entry.retrograde %>
-    <%= entry.score < 0 ? ':(' : ':)' %>
-    <a href="/journal/<%=entry.id%>/edit">Edit</a>
-    <form class="" action="journal/<%=entry.id%>?_method=DELETE" method="post">
-      <input type="submit" name="" value="Delete Entry">
-    </form>
+<div class="hero is-large is-dark">
+  <div class="pt-6 hero-head has-text-centered">
+    <h1 class="title"> All Your Journal Entries</h1>
+    <a class="subtitle" href="/journal/new">
+      <span class="icon has-text-light">
+        <i class="fas fa-plus"></i>
+      </span>
+      Write a New Entry</a>
+
   </div>
-<% }) %>
+
+
+  <div class="hero-body">
+
+    <table class="table is-striped is-fullwidth">
+      <thead >
+        <th>Date</th>
+        <th>Moon Phase</th>
+        <th>Mercury in Retrograde?</th>
+        <th>Sentiment</th>
+        <th>Action</th>
+      </thead>
+
+    <tbody>
+      <% entries.forEach(entry=>{ %>
+        <tr>
+          <td>
+            <a href="/journal/<%=entry.id%>"><%= entry.date %></a>
+          </td>
+          <td>
+            <%- entry.phaseimg %>
+          </td>
+          <td >
+            <%= entry.retrograde ? "Yes" : "No" %>
+          </td>
+          <td>
+            <%= entry.score < 0 ? ':(' : ':)' %>
+          </td>
+          <td>
+            <form class="" method="post" action="journal/<%=entry.id%>?_method=DELETE">
+              <a class="button is-primary is-small" href="/journal/<%=entry.id%>/edit">Edit</a>
+              <button class='mt-1 mr-1 has-background-dark delete' type="submit" name="" value=""></button>
+            </form>
+
+          </td>
+
+        </tr>
+
+        <% }) %>
+
+    </tbody>
+  </table>
+  </div>
+</div>

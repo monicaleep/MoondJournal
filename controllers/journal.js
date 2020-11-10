@@ -8,7 +8,7 @@ const sentiment = new Sentiment();
 
 
 // Index route - show all entries for the user
-router.get('/',isLoggedIn,async (req,res)=>{
+router.get('/',isLoggedIn, async (req,res)=>{
   //console.log(req.user)
   const user = await db.user.findByPk(req.user.id)
   const entries = await user.getEntries({order: [['date','DESC']]})
@@ -31,14 +31,12 @@ router.delete('/:id',isLoggedIn,async (req,res)=>{
 
 // create route
 router.post('/',isLoggedIn, async (req,res)=>{
-  //console.log(req.body.text);
   const dateToUse = new Date(req.body.date)
   const retrogradeRes = await axios.get('https://mercuryretrogradeapi.com?date='+req.body.date)
-  retrograde = retrogradeRes.data.is_retrograde;
+  const retrograde = retrogradeRes.data.is_retrograde;
   const score = sentiment.analyze(req.body.text).score
   const moonURL = `https://www.icalendar37.net/lunar/api/?month=${dateToUse.getUTCMonth()+1}&year=${dateToUse.getUTCFullYear()}`
   const moonRes = await axios.get(moonURL)
-  console.log(moonRes.data.phase[dateToUse.getUTCDate()])
   const image = moonRes.data.phase[dateToUse.getUTCDate()].svg;
   const phaseName = moonRes.data.phase[dateToUse.getUTCDate()].phaseName;
   const createdEntry = await db.entry.create({ //do i want to allow multiple entries for a date? I think so.
@@ -55,12 +53,33 @@ router.post('/',isLoggedIn, async (req,res)=>{
 })
 
 // update route - put the changes into the database
-router.put('/:id',isLoggedIn,(req,res)=>{
-  res.send('put route')
+router.put('/:id',isLoggedIn, async(req,res)=>{
+  const foundEntry = await db.entry.findByPk(req.params.id);
+  const score = sentiment.analyze(req.body.text).score;
+  // update score and text fields of the entry
+  foundEntry.text = req.body.text;
+  foundEntry.score = score;
+  //if the date has changed, need to make api calls
+  if(foundEntry.date !== req.body.date){
+    const dateToUse = new Date(req.body.date)
+    const retrogradeRes = await axios.get('https://mercuryretrogradeapi.com?date='+req.body.date)
+    retrograde = retrogradeRes.data.is_retrograde;
+    const moonURL = `https://www.icalendar37.net/lunar/api/?month=${dateToUse.getUTCMonth()+1}&year=${dateToUse.getUTCFullYear()}`
+    const moonRes = await axios.get(moonURL)
+    const image = moonRes.data.phase[dateToUse.getUTCDate()].svg;
+    const phaseName = moonRes.data.phase[dateToUse.getUTCDate()].phaseName;
+    // update fields of the entry
+    foundEntry.retrograde = retrograde;
+    foundEntry.phase = phaseName;
+    foundEntry.phaseimg = image;
+    foundEntry.date = req.body.date;
+  }
+  updatedEntry = await foundEntry.save();
+  res.redirect('/journal')
 })
 
 // edit route - edit an Entry
-router.get('/:id/edit',isLoggedIn,async (req,res)=>{
+router.get('/:id/edit',isLoggedIn, async (req,res)=>{
   // need to check if user is the owner
   try{
     const entryToEdit = await db.entry.findByPk(req.params.id)
@@ -78,7 +97,7 @@ router.get('/:id/edit',isLoggedIn,async (req,res)=>{
 })
 
 // show route - show more details of an entry
-router.get('/:id',isLoggedIn,async (req,res)=>{
+router.get('/:id',isLoggedIn, async (req,res)=>{
   const entry = await db.entry.findByPk(req.params.id)
   if(entry.userId === req.user.id){
     res.render('journal/show',{entry})

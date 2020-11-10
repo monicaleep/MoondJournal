@@ -2,3 +2,10 @@ svg{
   width: 40px;
   height: 40px;
 }
+
+.landinghero{
+  background-image: url('../img/landing-moon.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

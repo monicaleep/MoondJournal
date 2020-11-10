@@ -1,23 +1,46 @@
-<h1> All your self care tasks</h1>
-<a href="/todo/new">New</a>
-<ul>
-  <% foundTodos.forEach(todo=>{ %>
-    <li>
-      <%= todo.task%>
-      <form method="post" action="/todo/<%=todo.id%>?_method=PUT">
-        <input type="submit" name="" value="Done today">
-      </form>
-      <form method="post" action="/todo/<%=todo.id%>?_method=DELETE">
-        <input type="submit" name="" value="Delete Task">
-      </form>
-      Last Done:
-      <% if(todo.lastdone){ %>
-        <%= todo.lastdone%>
+<div class="hero is-dark is-fullheight-with-navbar">
+  <div class="pt-6 hero-head has-text-centered">
+    <h1 class="title"> All your self care tasks</h1>
+    <a class="subtitle" href="/todo/new">
+      <span class="icon has-text-light">
+        <i class="fas fa-plus"></i>
+      </span>
+      Add New Task</a>
 
-      <%} else { %>
-        Not Done Yet
-      <%}%>
+  </div>
+  <div class="hero-body ">
 
-    </li>
-  <%})%>
-</ul>
+    <div class="columns is-multiline is-centered">
+      <% foundTodos.forEach(todo=>{ %>
+      <div class="column is-narrow ">
+        <div class="card">
+          <div class="card-header">
+            <p class="card-header-title">
+              <%= todo.task %>
+            </p>
+            <form class="" method="post" action="/todo/<%=todo.id%>?_method=DELETE">
+              <button class='mt-1 mr-1 has-background-dark delete' type="submit" name="" value=""></button>
+            </form>
+          </div>
+          <div class="card-content">
+            <div class="content">
+              Last Done:
+              <% if(todo.lastdone){ %>
+              <%= todo.lastdone %>
+              <%} else { %>
+              Not Yet
+              <%}%>
+                  </div>
+                </div>
+                <footer class="card-footer pt-3 pb-3 field is-grouped is-grouped-centered">
+                  <form class="control" method="post" action="/todo/<%=todo.id%>?_method=PUT">
+              <input class="button is-success is-small" type="submit" name="" value="Done today">
+              </form>
+
+              </footer>
+            </div>
+          </div>
+          <%})%>
+        </div>
+      </div>
+    </div>

@@ -7,7 +7,7 @@ const isLoggedIn = require('../middleware/isLoggedIn');
 router.get('/',isLoggedIn,(req,res)=>{
   db.user.findByPk(req.user.id)
   .then(user=>{
-    user.getTodos().then(todos=>{
+    user.getTodos({order: [['lastdone','DESC']]}).then(todos=>{
       res.render('todo/index',{foundTodos:todos})
     })
   })
@@ -23,7 +23,7 @@ router.get('/new',isLoggedIn,(req,res)=>{
 
 // update route - change date of last done task to today's date
 router.put('/:id',isLoggedIn,(req,res)=>{
-  const today = new Date(); // TODO check if user is owner
+  const today = new Date(); 
   db.todo.update({
     lastdone: today,
   },{
@@ -51,7 +51,7 @@ router.post('/',isLoggedIn,(req,res)=>{
 })
 
 
-// delete route - delete a task from DB TODO check if user is owner
+// delete route - delete a task from DB
 router.delete('/:id',isLoggedIn,(req,res)=>{
   db.todo.destroy({
     where: {id: req.params.id}

@@ -1,4 +1,5 @@
-require('dotenv').config()
+require('dotenv').config();
+const db = require('./models');
 const express = require('express');
 const app = express();
 const ejsLayouts = require('express-ejs-layouts')
@@ -47,11 +48,10 @@ app.use((req,res,next)=>{
 app.use('/auth',require('./controllers/auth'));
 app.use('/journal',require('./controllers/journal'))
 app.use('/todo',require('./controllers/todo'))
+app.use('/profile',require('./controllers/profile'))
 
 
-app.get('/profile',isLoggedIn,(req,res)=>{
-  res.render('profile')
-})
+
 
 app.get('/',(req,res)=>{
     res.render('home')

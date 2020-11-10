@@ -98,13 +98,17 @@ router.get('/:id/edit',isLoggedIn, async (req,res)=>{
 
 // show route - show more details of an entry
 router.get('/:id',isLoggedIn, async (req,res)=>{
-  const entry = await db.entry.findByPk(req.params.id)
-  if(entry.userId === req.user.id){
-    res.render('journal/show',{entry})
+  try{
+    const entry = await db.entry.findByPk(req.params.id)
+    if(entry.userId === req.user.id){
+      res.render('journal/show',{entry})
 
-  } else{
-    req.flash('error','That is a private journal entry, try to view one that you wrote')
-    res.redirect('/journal')
+    } else{
+      req.flash('error','That is a private journal entry, try to view one that you wrote')
+      res.redirect('/journal')
+    }
+  } catch(err){
+    res.render('404')
   }
 })
 module.exports = router;

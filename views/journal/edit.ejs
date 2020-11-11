@@ -1,12 +1,33 @@
-<div class="content">
-  editing the entry <%= entry.id %>
+<section class="landinghero hero is-fullheight-with-navbar is-dark">
+  <div class="hero-body">
+    <div class="columns">
+      <div class="column">
+        <h1 class="title ">
+          Editing Your Journal Entry
 
-</div>
-<form class="" action="/journal/<%=entry.id%>?_method=PUT" method="post">
-  <label for="date">Date:</label>
-  <input type="date" id="date" name="date" value="<%=entry.date%>">
-  <label for="text">Entry Text:</label>
-  <textarea name="text" rows="8" cols="80"><%=entry.text%></textarea>
-
-  <input type="submit" name="" value="Save Entry">
-</form>
+        </h1>
+        <h2 class="subtitle">
+          On
+            <%=entry.date%>, how did you feel?
+        </h2>
+      </div>
+      <div class="column">
+        <form class="" action="/journal/<%=entry.id%>?_method=PUT" method="post">
+          <div class="field">
+            <label class="label is-size-5 has-text-light" for="date">Date:</label>
+            <div class="control">
+              <input class="p-1 text" type="date" id="date" name="date" value="<%=entry.date%>">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label is-size-5 has-text-light" for="text">Entry Text:</label>
+            <div class="control">
+              <textarea class="textarea" name="text" rows="8" cols="80"><%=entry.text%></textarea>
+            </div>
+          </div>
+          <input class="button is-dark is-inverted is-outlined" type="submit" name="" value="Save Entry">
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

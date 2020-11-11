@@ -1,18 +1,35 @@
-<h2 class='title'>Diary Entry from <%=entry.date%> </h2>
-
-  <%-entry.phaseimg%>
-
-
-
-<div class="content">
-  <h3 class='subtitle'>You wrote:</h3>
-  <%=entry.text%>
+<div class="landinghero hero is-fullheight-with-navbar is-dark">
+  <div class="hero-head pt-6">
+    <h2 class='title'>Diary Entry from <%=entry.date%> </h2>
+  </div>
+  <div class="hero-body">
+    <div class="container">
+      <div class="tile is-ancestor">
+        <div class="tile is-4 is-vertical is-parent">
+          <div class="tile is-dark notification is-child box">
+            <p> <%-entry.phaseimg%> <br> The moon was a <%=entry.phase%>.</p>
+            <p>Mercury was <%= entry.retrograde ? "" : 'not'%> in retrograde.</p>
+            <p>Overall, you seemed <%=entry.score>0 ?'happy':'sad'%>.</p>
+          </div>
+          <div class="tile is-dark notification box is-child">
+            <p class="title"><a href="/journal/<%=entry.id%>/edit">Edit this entry</a></p>
+            <form class="" action="journal/<%=entry.id%>?_method=DELETE" method="post">
+              <input type="submit" name="" value="Delete this entry">
+            </form>
+          </div>
+        </div>
+        <div class="tile is-parent">
+          <div class="tile is-child is-dark notification box">
+            <p class="title ">You Wrote:</p>
+            <p class=""><%=entry.text%> </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-footer">
+    <div class="section">
+      <a href="/journal" class="has-text-light">Back to Journal Summary</a>
+    </div>
+  </div>
 </div>
-
-<div class="content">
-  <p>Mercury was <%= entry.retrograde ? "" : 'not'%> in retrograde</p>
-</div>
-<a href="/journal/<%=entry.id%>/edit">Edit this entry</a>
-<form class="" action="journal/<%=entry.id%>?_method=DELETE" method="post">
-  <input type="submit" name="" value="Delete this entry">
-</form>

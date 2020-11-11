@@ -1,4 +1,4 @@
-<section class="landinghero hero is-fullheight is-dark">
+<section class="landinghero hero is-fullheight-with-navbar is-dark">
   <div class="hero-body">
     <div class="columns">
       <div class="column">
@@ -12,13 +12,13 @@
       <div class="column">
         <form class="" action="/journal" method="post">
           <div class="field">
-            <label class="label has-text-light" for="date">Date:</label>
+            <label class="label is-size-5 has-text-light" for="date">Date:</label>
             <div class="control">
-              <input class="text" type="date" id="date" name="date" value="<%=today%>">
+              <input class="p-1 text" type="date" id="date" name="date" value="<%=today%>">
             </div>
           </div>
           <div class="field">
-            <label class="label has-text-light" for="text">Entry Text:</label>
+            <label class="label is-size-5 has-text-light" for="text">Entry Text:</label>
             <div class="control">
               <textarea class="textarea" name="text" rows="8" cols="80"></textarea>
             </div>

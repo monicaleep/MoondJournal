@@ -1,4 +1,6 @@
 <h2><%= currentUser.name %>'s Profile</h2>
 <p>You have written <%=totalEntries%> journal entries</p>
 <p>Your average happiness score is <%=happiness%></p>
-<button type="button" name="button">delete account</button>
+<form class="" method="post" action="profile/<%=currentUser.id%>?_method=DELETE">
+  <button class='button is-danger' type="submit" name="" value="">Delete Account</button>
+</form>

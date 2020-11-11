@@ -20,3 +20,9 @@ input[type="date"]{
   border-color: $input-border-color;
   border-radius: $input-radius;
 }
+
+@media screen and (max-width: 450px){
+  #journal--table{
+    overflow: scroll;
+  }
+}

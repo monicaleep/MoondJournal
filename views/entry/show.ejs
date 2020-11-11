@@ -12,9 +12,12 @@
             <p>Overall, you seemed <%=entry.score>0 ?'happy':'sad'%>.</p>
           </div>
           <div class="tile is-dark notification box is-child">
-            <p class="title"><a href="/entry/<%=entry.id%>/edit">Edit this entry</a></p>
+            <div class="content">
+
+              <p class="button is-small has-background-grey is-white is-outlined "><a style="text-decoration:none" href="/entry/<%=entry.id%>/edit">Edit this entry</a></p>
+            </div>
             <form class="" action="/entry/<%=entry.id%>?_method=DELETE" method="post">
-              <input type="submit" name="" value="Delete this entry">
+              <input class="button is-small is-dark is-outlined is-inverted" type="submit" name="" value="Delete this entry">
             </form>
           </div>
         </div>

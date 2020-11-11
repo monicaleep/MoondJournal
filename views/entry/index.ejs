@@ -1,7 +1,7 @@
 <div class="landinghero hero is-fullheight-with-navbar is-dark">
   <div class="pt-6 hero-head has-text-centered">
     <h1 class="title"> All Your Journal Entries</h1>
-    <a class="subtitle" href="/journal/new">
+    <a class="subtitle" href="/entry/new">
       <span class="icon has-text-light">
         <i class="fas fa-plus"></i>
       </span>
@@ -25,7 +25,7 @@
       <% entries.forEach(entry=>{ %>
         <tr>
           <td>
-            <a href="/journal/<%=entry.id%>"><%= entry.date %></a>
+            <a href="/entry/<%=entry.id%>"><%= entry.date %></a>
           </td>
           <td>
             <%- entry.phaseimg %>
@@ -37,8 +37,8 @@
             <%= entry.score < 0 ? '😫' : '😁' %>
           </td>
           <td>
-            <form class="" method="post" action="journal/<%=entry.id%>?_method=DELETE">
-              <a class="button is-rounded is-dark is-small" href="/journal/<%=entry.id%>/edit">Edit</a>
+            <form class="" method="post" action="entry/<%=entry.id%>?_method=DELETE">
+              <a class="button is-rounded is-dark is-small" href="/entry/<%=entry.id%>/edit">Edit</a>
               <button class='mt-1 mr-1 has-background-dark delete' type="submit" name="" value=""></button>
             </form>
 

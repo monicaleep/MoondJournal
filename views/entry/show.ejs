@@ -12,8 +12,8 @@
             <p>Overall, you seemed <%=entry.score>0 ?'happy':'sad'%>.</p>
           </div>
           <div class="tile is-dark notification box is-child">
-            <p class="title"><a href="/journal/<%=entry.id%>/edit">Edit this entry</a></p>
-            <form class="" action="journal/<%=entry.id%>?_method=DELETE" method="post">
+            <p class="title"><a href="/entry/<%=entry.id%>/edit">Edit this entry</a></p>
+            <form class="" action="entry/<%=entry.id%>?_method=DELETE" method="post">
               <input type="submit" name="" value="Delete this entry">
             </form>
           </div>
@@ -29,7 +29,7 @@
   </div>
   <div class="hero-footer">
     <div class="section">
-      <a href="/journal" class="has-text-light">Back to Journal Summary</a>
+      <a href="/entry" class="has-text-light">Back to Journal Summary</a>
     </div>
   </div>
 </div>

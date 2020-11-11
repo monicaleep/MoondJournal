@@ -45,7 +45,7 @@ app.use((req,res,next)=>{
 
 //controllers middleware
 app.use('/auth',require('./controllers/auth'));
-app.use('/journal',require('./controllers/journal'))
+app.use('/entry',require('./controllers/entry'))
 app.use('/todo',require('./controllers/todo'))
 app.use('/profile',require('./controllers/profile'))
 

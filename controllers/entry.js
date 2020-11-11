@@ -12,21 +12,21 @@ router.get('/',isLoggedIn, async (req,res)=>{
   //console.log(req.user)
   const user = await db.user.findByPk(req.user.id)
   const entries = await user.getEntries({order: [['date','DESC']]})
-  res.render('journal/index',{entries})
+  res.render('entry/index',{entries})
 })
 
 // new route - display new entry page
 router.get('/new',isLoggedIn,(req,res)=>{
-  res.render('journal/new',{today: new Date().toLocaleDateString('en-CA')})
+  res.render('entry/new',{today: new Date().toLocaleDateString('en-CA')})
 })
 
-// delete route - deletes a journal entry
+// delete route - deletes a entry entry
 router.delete('/:id',isLoggedIn,async (req,res)=>{
   const deleted = await db.entry.destroy({
     where: {id:req.params.id}
   });
   req.flash('success','Deleted entry')
-  res.redirect('/journal')
+  res.redirect('/entry')
 })
 
 // create route
@@ -49,7 +49,7 @@ router.post('/',isLoggedIn, async (req,res)=>{
       retrograde: retrograde
   })
     console.log(createdEntry);
-    res.redirect('/journal')
+    res.redirect('/entry')
 })
 
 // update route - put the changes into the database
@@ -75,7 +75,7 @@ router.put('/:id',isLoggedIn, async(req,res)=>{
     foundEntry.date = req.body.date;
   }
   updatedEntry = await foundEntry.save();
-  res.redirect('/journal')
+  res.redirect('/entry')
 })
 
 // edit route - edit an Entry
@@ -84,14 +84,14 @@ router.get('/:id/edit',isLoggedIn, async (req,res)=>{
   try{
     const entryToEdit = await db.entry.findByPk(req.params.id)
     if(entryToEdit.userId === req.user.id){
-      res.render('journal/edit',{entry:entryToEdit})
+      res.render('entry/edit',{entry:entryToEdit})
     } else {
       req.flash('error',`You don't have permission to edit that entry`);
-      res.redirect('/journal')
+      res.redirect('/entry')
     }
   } catch(err){
     req.flash('error','Entry not found')
-    res.redirect('/journal')
+    res.redirect('/entry')
   }
 
 })
@@ -101,11 +101,11 @@ router.get('/:id',isLoggedIn, async (req,res)=>{
   try{
     const entry = await db.entry.findByPk(req.params.id)
     if(entry.userId === req.user.id){
-      res.render('journal/show',{entry})
+      res.render('entry/show',{entry})
 
     } else{
-      req.flash('error','That is a private journal entry, try to view one that you wrote')
-      res.redirect('/journal')
+      req.flash('error','That is a private entry, try to view one that you wrote')
+      res.redirect('/entry')
     }
   } catch(err){
     res.render('404')

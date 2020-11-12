@@ -7719,5 +7719,5 @@ input[type="date"] {
   border-radius: 4px; }
 
 @media screen and (max-width: 450px) {
-  #journal--table {
+  #entry--table {
     overflow: scroll; } }

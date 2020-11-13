@@ -6,51 +6,48 @@
         <i class="fas fa-plus"></i>
       </span>
       Write a New Entry</a>
-
   </div>
-
-
   <div class="hero-body">
+    <% if(entries.length>0){ %>
     <div id="entry--table" class="container is-fullhd">
       <table class="table is-striped is-fullwidth">
-        <thead >
+        <thead>
           <th>Date</th>
           <th>Moon Phase</th>
           <th>Mercury in Retrograde?</th>
           <th>Sentiment</th>
           <th>Action</th>
         </thead>
-
         <tbody>
           <% entries.forEach(entry=>{ %>
-            <tr>
-              <td>
-                <a href="/entry/<%=entry.id%>"><%= entry.date %></a>
-              </td>
-              <td>
-                <%- entry.phaseimg %>
-              </td>
-              <td >
-                <%= entry.retrograde ? "Yes" : "No" %>
-              </td>
-              <td>
-                <%= entry.score < 0 ? '😫' : '😁' %>
-              </td>
-              <td>
-                <form class="" method="post" action="/entry/<%=entry.id%>?_method=DELETE">
-                  <a class="button is-rounded is-dark is-small" href="/entry/<%=entry.id%>/edit">Edit</a>
-                  <button class='mt-1 mr-1 has-background-dark delete' type="submit" name="" value=""></button>
-                </form>
-
-              </td>
-
-            </tr>
-
-            <% }) %>
-
-          </tbody>
-        </table>
-
+          <tr>
+            <td>
+              <a href="/entry/<%=entry.id%>"><%= entry.date %></a>
+            </td>
+            <td>
+              <%- entry.phaseimg %>
+            </td>
+            <td>
+              <%= entry.retrograde ? "Yes" : "No" %>
+            </td>
+            <td>
+              <%= entry.score < 0 ? '😫' : '😁' %>
+            </td>
+            <td>
+              <form class="" method="post" action="/entry/<%=entry.id%>?_method=DELETE">
+                <a class="button is-rounded is-dark" href="/entry/<%=entry.id%>/edit">Edit</a>
+                <button class='mt-1 ml-6 has-background-dark delete' type="submit" name="" value=""></button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
     </div>
+    <%  }else{ %>
+    <div class="container">
+      <h2 class="title has-text-centered">No journal entries yet!</h2>
+    </div>
+    <%  } %>
   </div>
 </div>

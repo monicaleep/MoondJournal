@@ -2,6 +2,9 @@
 
 ## About this app
 
+An app where you can record your feelings, keep track of your self-care tasks, and see how your sentiments are affected by the celestial cycles.
+Live demo [here](https://moondjournal.herokuapp.com/)
+
 ### ERD
 
 [here](https://lucid.app/invitations/accept/7a5e6e3b-52ab-4939-b5ee-4985d39d198e)

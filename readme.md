@@ -9,7 +9,9 @@ Live demo [here](https://moondjournal.herokuapp.com/)
 
 ### ERD
 
+
 ERD for the models are hosted [here](https://lucid.app/invitations/accept/7a5e6e3b-52ab-4939-b5ee-4985d39d198e).
+
 ----------------------------------------------------------
 ### User Stories
 
@@ -23,7 +25,9 @@ ERD for the models are hosted [here](https://lucid.app/invitations/accept/7a5e6e
 ----------------------------------------------------------
 ### Wireframes
 
+
 Wireframes are hosted [here](https://wireframepro.mockflow.com/view/M26c6fa717eb51bc48851b5d82b9c500e1604695539054).
+
 ----------------------------------------------------------
 ### APIs and Tech Used
 
@@ -37,6 +41,7 @@ Wireframes are hosted [here](https://wireframepro.mockflow.com/view/M26c6fa717eb
 
 
 ----------------------------------------------------------
+
 #### Instructions to Install it locally
 1. Fork and clone
 2. Install dependencies `npm i`

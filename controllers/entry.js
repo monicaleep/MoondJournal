@@ -7,21 +7,27 @@ const Sentiment = require('sentiment'); // npm package to calculate 'sentiment' 
 const sentiment = new Sentiment();
 
 
-// Index route - show all entries for the user
+// Index  - show all entries for the user ---- GET request to /entry
 router.get('/', isLoggedIn, async (req, res) => {
-  const user = await db.user.findByPk(req.user.id)
-  const entries = await user.getEntries({
-    order: [
-      ['date', 'DESC']
-    ]
-  })
-  res.render('entry/index', {
-    entries
-  })
+  try{
+    const user = await db.user.findByPk(req.user.id)
+    const entries = await user.getEntries({
+      order: [
+        ['date', 'DESC']
+      ]
+    })
+    res.render('entry/index', {
+      entries
+    })
+  }catch(err){
+    console.log(err)
+    req.flash('error','An error has occurred')
+    res.redrect('/')
+  }
 })
 
 
-// new route - display new entry page
+// new  - display new entry page ---- GET request to /entry/new
 router.get('/new', isLoggedIn, (req, res) => {
   res.render('entry/new', {
     today: new Date().toLocaleDateString('en-CA')
@@ -29,73 +35,91 @@ router.get('/new', isLoggedIn, (req, res) => {
 })
 
 
-// delete route - deletes a entry entry
+// delete  - deletes a entry  ---- DELETE reques to /entry/:id
 router.delete('/:id', isLoggedIn, async (req, res) => {
-  const deleted = await db.entry.destroy({
-    where: {
-      id: req.params.id
-    }
-  });
-  req.flash('success', 'Deleted entry')
-  res.redirect('/entry')
+  try{
+    const deleted = await db.entry.destroy({
+      where: {
+        id: req.params.id
+      }
+    });
+    req.flash('success', 'Deleted entry')
+    res.redirect('/entry')
+  } catch(err){
+    console.log(err);
+    req.flash('error','An error has occurred')
+    res.redirect('/entry')
+  }
 })
 
 
-// create route
+// create  ---- POST request to /entry
 router.post('/', isLoggedIn, async (req, res) => {
-  const dateToUse = new Date(req.body.date)
-  // API call to retrograde API
-  const retrogradeRes = await axios.get('https://mercuryretrogradeapi.com?date=' + req.body.date)
-  const retrograde = retrogradeRes.data.is_retrograde;
-  const score = sentiment.analyze(req.body.text).score
-  // API call to get moon phase and image
-  const moonURL = `https://www.icalendar37.net/lunar/api/?month=${dateToUse.getUTCMonth()+1}&year=${dateToUse.getUTCFullYear()}`
-  const moonRes = await axios.get(moonURL)
-  const image = moonRes.data.phase[dateToUse.getUTCDate()].svg;
-  const phaseName = moonRes.data.phase[dateToUse.getUTCDate()].phaseName;
-  // create the entry in the database
-  const createdEntry = await db.entry.create({
-    date: req.body.date,
-    text: req.body.text,
-    score: score,
-    userId: req.user.id,
-    phase: phaseName,
-    phaseimg: image,
-    retrograde: retrograde
-  })
-  res.redirect('/entry')
-})
-
-
-// update route - put the changes into the database
-router.put('/:id', isLoggedIn, async (req, res) => {
-  const foundEntry = await db.entry.findByPk(req.params.id);
-  const score = sentiment.analyze(req.body.text).score;
-  // update score and text fields of the entry
-  foundEntry.text = req.body.text;
-  foundEntry.score = score;
-  //if the date has changed, need to make api calls
-  if (foundEntry.date !== req.body.date) {
+  try{
     const dateToUse = new Date(req.body.date)
-    // api call to mercury retrograde
+    // API call to retrograde API
     const retrogradeRes = await axios.get('https://mercuryretrogradeapi.com?date=' + req.body.date)
-    retrograde = retrogradeRes.data.is_retrograde;
-    // api call to get moon phase and image
+    const retrograde = retrogradeRes.data.is_retrograde;
+    const score = sentiment.analyze(req.body.text).score
+    // API call to get moon phase and image
     const moonURL = `https://www.icalendar37.net/lunar/api/?month=${dateToUse.getUTCMonth()+1}&year=${dateToUse.getUTCFullYear()}`
     const moonRes = await axios.get(moonURL)
     const image = moonRes.data.phase[dateToUse.getUTCDate()].svg;
     const phaseName = moonRes.data.phase[dateToUse.getUTCDate()].phaseName;
-    // update fields of the entry
-    foundEntry.retrograde = retrograde;
-    foundEntry.phase = phaseName;
-    foundEntry.phaseimg = image;
-    foundEntry.date = req.body.date;
+    // create the entry in the database
+    const createdEntry = await db.entry.create({
+      date: req.body.date,
+      text: req.body.text,
+      score: score,
+      userId: req.user.id,
+      phase: phaseName,
+      phaseimg: image,
+      retrograde: retrograde
+    })
+    res.redirect('/entry')
+  }catch(err){
+    console.log(err)
+    req.flash('error','An error has occurred')
+    res.redirect('/entry')
   }
-  updatedEntry = await foundEntry.save();
-  res.redirect('/entry')
 })
 
-// edit route - edit an Entry
+
+// update  - put the changes into the database -- PUT request to /entry/:id
+router.put('/:id', isLoggedIn, async (req, res) => {
+  try{
+    const foundEntry = await db.entry.findByPk(req.params.id);
+    const score = sentiment.analyze(req.body.text).score;
+    // update score and text fields of the entry
+    foundEntry.text = req.body.text;
+    foundEntry.score = score;
+    //if the date has changed, need to make api calls
+    if (foundEntry.date !== req.body.date) {
+      const dateToUse = new Date(req.body.date)
+      // api call to mercury retrograde
+      const retrogradeRes = await axios.get('https://mercuryretrogradeapi.com?date=' + req.body.date)
+      retrograde = retrogradeRes.data.is_retrograde;
+      // api call to get moon phase and image
+      const moonURL = `https://www.icalendar37.net/lunar/api/?month=${dateToUse.getUTCMonth()+1}&year=${dateToUse.getUTCFullYear()}`
+      const moonRes = await axios.get(moonURL)
+      const image = moonRes.data.phase[dateToUse.getUTCDate()].svg;
+      const phaseName = moonRes.data.phase[dateToUse.getUTCDate()].phaseName;
+      // update fields of the entry
+      foundEntry.retrograde = retrograde;
+      foundEntry.phase = phaseName;
+      foundEntry.phaseimg = image;
+      foundEntry.date = req.body.date;
+    }
+    updatedEntry = await foundEntry.save();
+    res.redirect('/entry')
+  } catch(err){
+    console.log(err)
+    req.flash('error','An error has occurred')
+    res.redirect('/entry')
+  }
+})
+
+// edit route - edit an Entry --- GET request to /entry/:id/edit
 router.get('/:id/edit', isLoggedIn, async (req, res) => {
   // need to check if user is the owner
   try {
@@ -115,7 +139,7 @@ router.get('/:id/edit', isLoggedIn, async (req, res) => {
 })
 
 
-// show route - show more details of an entry
+// show route - show more details of an entry --- GET request to /entry/:id
 router.get('/:id', isLoggedIn, async (req, res) => {
   try {
     const entry = await db.entry.findByPk(req.params.id)

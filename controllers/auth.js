@@ -8,6 +8,7 @@ router.get('/signup',(req,res)=>{
   res.render('auth/signup')
 })
 
+
 router.post('/signup',(req,res)=>{
   db.user.findOrCreate({
     where : {email: req.body.email},
@@ -30,9 +31,11 @@ router.post('/signup',(req,res)=>{
   })
 })
 
+
 router.get('/login',(req,res)=>{
   res.render('auth/login')
 });
+
 
 router.post('/login', passport.authenticate('local',{
   failureRedirect: '/auth/login',
@@ -40,6 +43,7 @@ router.post('/login', passport.authenticate('local',{
   failureFlash: 'Invalid email or password, try again',
   successFlash: 'You have successfully logged in'
 }))
+
 
 router.get('/logout',(req,res)=>{
   req.logout();

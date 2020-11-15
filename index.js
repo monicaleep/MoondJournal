@@ -50,7 +50,7 @@ app.use('/entry',require('./controllers/entry'))
 app.use('/todo',require('./controllers/todo'))
 app.use('/profile',require('./controllers/profile'))
 
-
+// Index route - render the home page
 app.get('/',(req,res)=>{
     res.render('home')
 })
@@ -60,7 +60,7 @@ app.get('/*',(req,res)=>{
   res.render('404')
 })
 
-
+// Start the app
 const port = process.env.PORT || 3000
 app.listen(port,()=>{
   console.log(`listening on port ${port}`)

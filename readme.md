@@ -5,9 +5,11 @@
 An app where you can record your feelings, keep track of your self-care tasks, and see how your sentiments are affected by the celestial cycles.
 Live demo [here](https://moondjournal.herokuapp.com/)
 
+----------------------------------------------------------
+
 ### ERD
 
-[here](https://lucid.app/invitations/accept/7a5e6e3b-52ab-4939-b5ee-4985d39d198e)
+ERD for the models are hosted [here](https://lucid.app/invitations/accept/7a5e6e3b-52ab-4939-b5ee-4985d39d198e).
 ----------------------------------------------------------
 ### User Stories
 
@@ -16,24 +18,26 @@ Live demo [here](https://moondjournal.herokuapp.com/)
 - As a user I can populate a list of self care ideas
 - As a user I can tick off when I do self-care tasks
 - As a user I can see the last time I did a certain self-care task
-- BONUS: As a user I can view aggregate sentiment data for a certain date to see how the world feels when mercury is in retrograde
+- Future Development Plans: As a user I can view aggregate sentiment data for a certain date to see how the world feels when mercury is in retrograde
 
 ----------------------------------------------------------
 ### Wireframes
 
-[here](https://wireframepro.mockflow.com/view/M26c6fa717eb51bc48851b5d82b9c500e1604695539054)
+Wireframes are hosted [here](https://wireframepro.mockflow.com/view/M26c6fa717eb51bc48851b5d82b9c500e1604695539054).
 ----------------------------------------------------------
-### APIs and other outside tech
+### APIs and Tech Used
 
-- Mecury Retrograde API
+- Express, ejs, passport authentication (local), express-sessions
+- Postgres database connected via Sequelize ORM.
+- Bulma CSS Framework extended with custom SCSS.
 - Sentiment NPM package
-- Moment JS? for dates
-- I found [this]("https://www.icalendar37.net/lunar/api/?month=11&year=2020&lightColor=rgb(255%2C255%2C100)&shadeColor=black&LDZ=1604206800") API for moon phases but if I can't play nicely with it I will find something else or just use mercury in retrograde?
+- Mecury Retrograde API
+- [Moon Phase API]("https://www.icalendar37.net/lunar/api/?month=11&year=2020&lightColor=rgb(255%2C255%2C100)&shadeColor=black&LDZ=1604206800")
 
 
 
-
-## Instructions to install it locally
+----------------------------------------------------------
+#### Instructions to Install it locally
 1. Fork and clone
 2. Install dependencies `npm i`
 3. create a `config.json` with the following code:

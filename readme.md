@@ -31,14 +31,27 @@ Wireframes are hosted [here](https://wireframepro.mockflow.com/view/M26c6fa717eb
 ----------------------------------------------------------
 ### APIs and Tech Used
 
-- Express, ejs, passport authentication (local), express-sessions
+- Node packages: Express, ejs, ejs-layovers, dotenv, passport authentication (local), express-sessions, Sentiment, axios, bcrypt, pg, sequelize
 - Postgres database connected via Sequelize ORM.
 - Bulma CSS Framework extended with custom SCSS.
 - Sentiment NPM package
 - Mecury Retrograde API
 - [Moon Phase API]("https://www.icalendar37.net/lunar/api/?month=11&year=2020&lightColor=rgb(255%2C255%2C100)&shadeColor=black&LDZ=1604206800")
 
+----------------------------------------------------------
+### Approach Taken
 
+0. Finalize ERD and setup my database models for all required functionality
+1. Stub out all of the routes I will need. Use res.send to ensure I am hitting them.
+2. Start on the backend first, started with the TODO (Self-Care Task) routes as they were a bit more straightforward
+2.5. Add very basic front end for these routes to ensure data is coming across in the right formats
+3. Continue on the backend to get the Journal Entries
+4. Error handling on backend
+5. Style the front end
+
+----------------------------------------------------------
+### Unsolved issues
+None! In the future I would like to add the ability to view a summary of all entries sentiments by date and correlate against moon phases and mercury retrograde.
 
 ----------------------------------------------------------
 

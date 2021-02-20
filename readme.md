@@ -31,7 +31,7 @@ Wireframes are hosted [here](https://wireframepro.mockflow.com/view/M26c6fa717eb
 ----------------------------------------------------------
 ### APIs and Tech Used
 
-- Node packages: Express, ejs, ejs-layovers, dotenv, passport authentication (local), express-sessions, Sentiment, axios, bcrypt, pg, sequelize
+- Node packages: Express, ejs, ejs-layouts, dotenv, passport authentication (local), express-sessions, Sentiment, axios, bcrypt, pg, sequelize
 - Postgres database connected via Sequelize ORM.
 - Bulma CSS Framework extended with custom SCSS.
 - Sentiment NPM package
